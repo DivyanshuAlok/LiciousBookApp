@@ -2,7 +2,7 @@ import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useDispatch} from 'react-redux';
-import {addFav} from '../Redux/FavSlice';
+import {addFav, removeFav} from '../Redux/FavSlice';
 
 const Card = ({item}) => {
   const [author, setAuthor] = useState('');
@@ -27,23 +27,15 @@ const Card = ({item}) => {
   };
 
   const handleFavToggle = () => {
-    const book = {
-      key: item.key,
-      link: `https://openlibrary.org${item.key}.json`,
-      name: item.title,
-      author: author,
-      description: description,
-      genre: genre,
-    };
-
     if (fav) {
       console.log('removed from Fav');
+      dispatch(removeFav(item.key));
     } else {
       dispatch(
         addFav({
           key: item.key,
           link: `https://openlibrary.org${item.key}.json`,
-          name: item.title,
+          title: item.title,
           author: author,
           description: description,
           genre: genre,

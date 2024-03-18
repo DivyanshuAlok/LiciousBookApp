@@ -18,13 +18,13 @@ const Home = () => {
   }, []);
 
   return (
-    <View>
+    <React.StrictMode>
       <FlatList
         data={bookList}
         renderItem={({item}) => <Card item={item} />}
         keyExtractor={item => item.key}
       />
-    </View>
+    </React.StrictMode>
   );
 };
 

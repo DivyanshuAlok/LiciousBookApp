@@ -1,17 +1,16 @@
 import {StyleSheet, Text, View, FlatList} from 'react-native';
 import {useSelector} from 'react-redux';
 import React from 'react';
-import Card from '../Components/Card';
+import FavCard from '../Components/FavCard';
 
 const Favorite = () => {
   const bookList = useSelector(state => state.fav);
 
   return (
     <View>
-      <Text>Favorite</Text>
       <FlatList
         data={bookList}
-        renderItem={({item}) => <Card item={item} />}
+        renderItem={({item}) => <FavCard item={item} />}
         keyExtractor={item => item.key}
       />
     </View>
