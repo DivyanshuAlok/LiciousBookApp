@@ -13,6 +13,10 @@ const Header = () => {
   const [searchedBooks, setSearchedBooks] = useState([]);
   const [selectedBook, setSelectedBook] = useState('');
 
+  const findBook = async () => {
+    let response = await fetch(`https://openlibrary.org/search.json`);
+  };
+
   return (
     <Autocomplete
       autoCapitalize="none"
@@ -27,7 +31,11 @@ const Header = () => {
       // Onchange of the text changing the state of the query
       // Which will trigger the findFilm method
       // To show the suggestions
-      onChangeText={text => findBook(text)}
+      onChangeText={text => {
+        if (text.length > 3) {
+          findBook(text);
+        }
+      }}
       placeholder="Enter Book  title"
       renderItem={({item}) => (
         // For the suggestion view
