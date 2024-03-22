@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Dimensions} from 'react-native';
 import React, {useState} from 'react';
 import Home from './src/Views/Home';
 import Favorite from './src/Views/Favorite';
@@ -8,6 +8,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Autocomplete from 'react-native-autocomplete-input';
 
 const Tab = createBottomTabNavigator();
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const Header = () => {
   const [searchedBooks, setSearchedBooks] = useState([]);
@@ -21,7 +23,11 @@ const Header = () => {
     <Autocomplete
       autoCapitalize="none"
       autoCorrect={false}
-      containerStyle={styles.autocompleteContainer}
+      containerStyle={{
+        width: windowWidth - 10,
+        backgroundColor: 'green',
+        justifyContent: 'center',
+      }}
       // Data to show in suggestion
       data={searchedBooks}
       // Default value if you want to set something in input
@@ -71,6 +77,30 @@ const App = () => {
           tabBarActiveTintColor: 'black',
           tabBarInactiveTintColor: 'gray',
           headerTitle: () => <Header />,
+          headerStyle: {
+            flex: 1,
+            backgroundColor: 'red',
+            alignItems: 'center',
+            justifyContent: 'center',
+          },
+          headerLeftContainerStyle: {
+            backgroundColor: 'black',
+            width: 0,
+            height: 0,
+          },
+          headerTitleContainerStyle: {
+            backgroundColor: 'yellow',
+            alignItems: 'center',
+            justifyContent: 'center',
+            alignSelf: 'center',
+            alignContent: 'center',
+          },
+          headerRightContainerStyle: {
+            backgroundColor: 'pink',
+            width: 0,
+            height: 0,
+          },
+          tabBarLabelStyle: {backgroundColor: 'blue'},
         })}>
         <Tab.Screen name="All" component={Home} />
         <Tab.Screen name="Favorites" component={Favorite} />
